@@ -1,0 +1,15 @@
+{
+  "name": "average_price",
+  "query": "{\n  \"aggregate\": \"vehicles\",\n  \"pipeline\": [\n    {\n      \"$match\": {\n        \"make\": {{ make }}\n      }\n    },\n    {\n      \"$group\": {\n        \"_id\": \"$make\",\n        \"avgPrice\": {\n          \"$avg\": {\n            \"$toDecimal\": \"$price\"\n          }\n        }\n      }\n    }\n  ],\n  \"cursor\": {}\n}",
+  "parameters": [
+    {
+      "name": "make",
+      "type": "String",
+      "spread": false
+    }
+  ],
+  "httpPath": "average_price",
+  "httpMethod": "GET",
+  "apiMode": "REST",
+  "gqlOperationType": "QUERY"
+}
