@@ -1,1 +1,1 @@
-# mug-kl-2024-08
+# MongoDB User Group KL Live Demo
