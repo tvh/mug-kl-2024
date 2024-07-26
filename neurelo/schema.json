@@ -1,0 +1,162 @@
+{
+  "objects": {
+    "vehicles": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "sourceName": "_id",
+          "sourceType": "ObjectId",
+          "default": {
+            "function": "auto"
+          },
+          "identifier": true,
+          "description": "Unique identifier for each vehicle."
+        },
+        "make": {
+          "type": "string",
+          "description": "The manufacturer of the vehicle."
+        },
+        "model": {
+          "type": "string",
+          "description": "The specific model of the vehicle."
+        },
+        "year": {
+          "type": "integer",
+          "description": "The year the vehicle was manufactured."
+        },
+        "price": {
+          "type": "string",
+          "format": "decimal",
+          "description": "The selling price of the vehicle."
+        },
+        "status": {
+          "type": "string",
+          "description": "The current status of the vehicle (e.g., available, sold)."
+        },
+        "features": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of features available in the vehicle."
+        },
+        "dealer_id": {
+          "type": "string",
+          "sourceType": "ObjectId",
+          "description": "The ID of the dealer offering the vehicle."
+        }
+      }
+    },
+    "dealers": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "sourceName": "_id",
+          "sourceType": "ObjectId",
+          "default": {
+            "function": "auto"
+          },
+          "identifier": true,
+          "description": "Unique identifier for each dealer."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the dealership."
+        },
+        "address": {
+          "nullable": true,
+          "$ref": "#/innerObjects/Address",
+          "description": "The address of the dealership."
+        },
+        "contact_number": {
+          "type": "string",
+          "description": "The contact phone number of the dealer."
+        },
+        "sales": {
+          "type": "array",
+          "items": {
+            "$ref": "#/innerObjects/Sale"
+          },
+          "description": "List of sales made by the dealer."
+        }
+      }
+    },
+    "customers": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "sourceName": "_id",
+          "sourceType": "ObjectId",
+          "default": {
+            "function": "auto"
+          },
+          "identifier": true,
+          "description": "Unique identifier for each customer."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the customer."
+        },
+        "email": {
+          "type": "string",
+          "description": "The email address of the customer."
+        },
+        "phone": {
+          "type": "string",
+          "description": "The phone number of the customer."
+        }
+      }
+    }
+  },
+  "innerObjects": {
+    "Address": {
+      "properties": {
+        "street": {
+          "type": "string",
+          "nullable": true,
+          "description": "Street address of the dealership."
+        },
+        "city": {
+          "type": "string",
+          "nullable": true,
+          "description": "City where the dealership is located."
+        },
+        "state": {
+          "type": "string",
+          "nullable": true,
+          "description": "State where the dealership is located."
+        },
+        "zipcode": {
+          "type": "string",
+          "nullable": true,
+          "description": "ZIP code of the dealership location."
+        }
+      }
+    },
+    "Sale": {
+      "properties": {
+        "vehicle_id": {
+          "type": "string",
+          "sourceType": "ObjectId",
+          "description": "The ID of the vehicle being sold in the sale."
+        },
+        "customer_id": {
+          "type": "string",
+          "sourceType": "ObjectId",
+          "description": "The ID of the customer buying the vehicle."
+        },
+        "sale_date": {
+          "type": "string",
+          "format": "date-time",
+          "sourceType": "Timestamp",
+          "description": "The date and time the sale was made."
+        },
+        "sale_price": {
+          "type": "string",
+          "format": "decimal",
+          "description": "The final sale price of the vehicle."
+        }
+      }
+    }
+  }
+}
