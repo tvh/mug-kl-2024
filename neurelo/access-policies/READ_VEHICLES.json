@@ -1,0 +1,17 @@
+[
+    {
+        "read": {
+            "objectName": "vehicles",
+            "properties": [
+                "dealer_id",
+                "id",
+                "make",
+                "model",
+                "price",
+                "status",
+                "year",
+                "features"
+            ]
+        }
+    }
+]
