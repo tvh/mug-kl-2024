@@ -1,0 +1,9 @@
+{
+  "name": "restaurant_reviews",
+  "query": "{\n  \"aggregate\": \"reviews\",\n  \"pipeline\": [\n    {\n      \"$lookup\": {\n        \"from\": \"restaurants\",\n        \"localField\": \"restaurant_id\",\n        \"foreignField\": \"_id\",\n        \"as\": \"restaurant\"\n      }\n    },\n    {\n      \"$unwind\": \"$restaurant\"\n    },\n    {\n      \"$project\": {\n        \"_id\": 1,\n        \"user_id\": 1,\n        \"restaurant_id\": 1,\n        \"rating\": 1,\n        \"comment\": 1,\n        \"review_date\": 1,\n        \"restaurant.name\": 1\n      }\n    }\n  ],\n  \"cursor\": {}\n}",
+  "parameters": [],
+  "httpPath": "restaurant_reviews",
+  "httpMethod": "GET",
+  "apiMode": "REST",
+  "gqlOperationType": "QUERY"
+}
