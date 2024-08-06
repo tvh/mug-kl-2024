@@ -1,0 +1,239 @@
+{
+  "objects": {
+    "restaurants": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "identifier": true,
+          "sourceName": "_id",
+          "sourceType": "ObjectId",
+          "default": {
+            "function": "auto"
+          },
+          "description": "Unique identifier for each restaurant."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the restaurant."
+        },
+        "address": {
+          "nullable": true,
+          "$ref": "#/innerObjects/Address",
+          "description": "Address of the restaurant."
+        },
+        "cuisine_type": {
+          "type": "string",
+          "description": "Type of cuisine the restaurant offers."
+        },
+        "phone_number": {
+          "type": "string",
+          "description": "Contact phone number of the restaurant."
+        },
+        "website": {
+          "type": "string",
+          "nullable": true,
+          "description": "Website URL of the restaurant."
+        },
+        "pricing": {
+          "type": "string",
+          "description": "Pricing category of the restaurant (e.g., $, $$, $$$)."
+        },
+        "ratings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/innerObjects/Rating"
+          },
+          "description": "List of ratings and reviews for the restaurant."
+        },
+        "menus": {
+          "type": "array",
+          "items": {
+            "$ref": "#/innerObjects/Menu"
+          },
+          "description": "List of menus offered by the restaurant."
+        }
+      }
+    },
+    "users": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "identifier": true,
+          "sourceName": "_id",
+          "sourceType": "ObjectId",
+          "default": {
+            "function": "auto"
+          },
+          "description": "Unique identifier for each user."
+        },
+        "username": {
+          "type": "string",
+          "unique": true,
+          "description": "Unique username of the user."
+        },
+        "email": {
+          "type": "string",
+          "description": "Email address of the user."
+        },
+        "password": {
+          "type": "string",
+          "description": "Password for the user account."
+        },
+        "account_creation": {
+          "type": "string",
+          "format": "date-time",
+          "sourceType": "Timestamp",
+          "description": "The time at which the user account was created."
+        }
+      }
+    },
+    "reviews": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "identifier": true,
+          "sourceName": "_id",
+          "sourceType": "ObjectId",
+          "default": {
+            "function": "auto"
+          },
+          "description": "Unique identifier for each review."
+        },
+        "user_id": {
+          "type": "string",
+          "sourceType": "ObjectId",
+          "description": "The ID of the user who wrote the review."
+        },
+        "restaurant_id": {
+          "type": "string",
+          "sourceType": "ObjectId",
+          "description": "The ID of the restaurant being reviewed."
+        },
+        "rating": {
+          "type": "integer",
+          "description": "Rating given by the user."
+        },
+        "comment": {
+          "type": "string",
+          "nullable": true,
+          "description": "Comment or review text provided by the user."
+        },
+        "review_date": {
+          "type": "string",
+          "format": "date-time",
+          "sourceType": "Timestamp",
+          "description": "The date when the review was written."
+        }
+      }
+    }
+  },
+  "innerObjects": {
+    "Address": {
+      "properties": {
+        "street": {
+          "type": "string",
+          "nullable": true,
+          "description": "Street address of the restaurant."
+        },
+        "city": {
+          "type": "string",
+          "nullable": true,
+          "description": "City where the restaurant is located."
+        },
+        "state": {
+          "type": "string",
+          "nullable": true,
+          "description": "State where the restaurant is located."
+        },
+        "country": {
+          "type": "string",
+          "nullable": true,
+          "description": "Country where the restaurant is located."
+        },
+        "zip_code": {
+          "type": "string",
+          "nullable": true,
+          "description": "Zip code of the restaurant's location."
+        },
+        "location": {
+          "nullable": true,
+          "$ref": "#/innerObjects/GeoLocation",
+          "description": "Geographical location (latitude and longitude) of the restaurant."
+        }
+      }
+    },
+    "GeoLocation": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of GeoJSON object (e.g., Point)."
+        },
+        "coordinates": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "format": "float"
+          },
+          "description": "Array of [longitude, latitude] coordinates."
+        }
+      }
+    },
+    "Rating": {
+      "properties": {
+        "user_id": {
+          "type": "string",
+          "sourceType": "ObjectId",
+          "description": "The ID of the user who gave the rating."
+        },
+        "rating": {
+          "type": "integer",
+          "description": "Rating value given by the user."
+        },
+        "comment": {
+          "type": "string",
+          "nullable": true,
+          "description": "Review text provided by the user."
+        },
+        "date": {
+          "type": "string",
+          "format": "date-time",
+          "sourceType": "Timestamp",
+          "description": "The date when the rating was given."
+        }
+      }
+    },
+    "Menu": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the menu."
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/innerObjects/MenuItem"
+          },
+          "description": "List of items in the menu."
+        }
+      }
+    },
+    "MenuItem": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the menu item."
+        },
+        "description": {
+          "type": "string",
+          "nullable": true,
+          "description": "Description of the menu item."
+        },
+        "price": {
+          "type": "string",
+          "format": "decimal",
+          "description": "Price of the menu item."
+        }
+      }
+    }
+  }
+}
